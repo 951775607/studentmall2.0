@@ -1,4 +1,5 @@
 package com.lhq.studentmall.util;
+
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -6,6 +7,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import java.security.Key;
 import java.security.SecureRandom;
+
 //对称加密算法，加密和解密都是使用相同的算法
 public class DESUtils {
 
@@ -78,7 +80,7 @@ public class DESUtils {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	public static void main(String[] args) {
 		System.out.println(getEncryptString("root"));
 		System.out.println(getEncryptString("mysql"));
