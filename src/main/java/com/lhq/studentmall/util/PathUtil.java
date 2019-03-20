@@ -1,5 +1,8 @@
 package com.lhq.studentmall.util;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -10,6 +13,7 @@ import java.util.Random;
  * @Description: 路径处理工具类.返回图片路径
  * @date 2019/3/3 14:41
  */
+@Configuration
 public class PathUtil {
 
     //获取系统分割符，因为windows和其他系统是不一样的。因此在运行的时候获取系统分隔符，然后替换
@@ -18,6 +22,27 @@ public class PathUtil {
             "yyyyMMddHHmmss"); // 时间格式化的格式
     private static final Random r = new Random();
 
+
+    @Value("${win.base.path}")
+    private static String winPath;
+
+    @Value("${linux.base.path}")
+    private static String linuxPath;
+
+    @Value("${shop.relevant.path}")
+    private static String shopPath;
+
+    public void setWinPath(String winPath) {
+        PathUtil.winPath = winPath;
+    }
+
+    public void setLinuxPath(String linuxPath) {
+        linuxPath = linuxPath;
+    }
+
+    public void setShopPath(String shopPath) {
+        PathUtil.shopPath = shopPath;
+    }
 
     /**
      * 功能描述:获取上传图片的根路径
@@ -32,8 +57,10 @@ public class PathUtil {
         //判断是win系统还是ios或linux
         if (os.toLowerCase().startsWith("win")) {
 //            basePath = " F:\\JavaCode\\graduation-design\\image\\";
+//            basePath = winPath;
             basePath = "F:/JavaCode/graduation-design";
         } else {
+//            basePath = linuxPath;
             basePath = "/home/student/image";
         }
         //替换系统运行符以应对不同的系统
@@ -52,13 +79,12 @@ public class PathUtil {
 //        String imagePath = "/upload/item/shop/" + shopId;
 //        imagePath = imagePath.replace("/", seperator);
 //        return imagePath;
+//        shopImagePathBuilder.append(winPath);
         shopImagePathBuilder.append("/upload/images/item/shop/");
-
         shopImagePathBuilder.append(shopId);
         shopImagePathBuilder.append("/");
         String shopImagePath = shopImagePathBuilder.toString().replace("/",
                 seperator);
-        System.out.println("shipImggePath1111:" + shopImagePath);
         return shopImagePath;
     }
 

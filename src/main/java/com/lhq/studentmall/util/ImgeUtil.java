@@ -51,7 +51,7 @@ public class ImgeUtil {
         System.out.println("generateThumbnail文件最终保存地址dest:" + dest);
         try {
             Thumbnails.of(thumbnail.getImage()).size(200, 200)
-                    .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/1.jpg")), 0.25f)
+                    .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/3.jpg")), 0.25f)
                     .outputQuality(0.8f).toFile(dest);
         } catch (IOException e) {
             throw new ShopOperationException("创建缩略图失败：" + e.toString());
@@ -190,7 +190,7 @@ public class ImgeUtil {
         //调用Thumbnails生成带有水印的图片
         try {
             Thumbnails.of(thumbnail.getImage()).size(337, 640)
-                    .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/3.jpg")), 0.25f)
+                    .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/1.jpg")), 0.25f)
                     .outputQuality(0.9f).toFile(dest);
         } catch (IOException e) {
             throw new ShopOperationException("创建缩略图失败：" + e.toString());
