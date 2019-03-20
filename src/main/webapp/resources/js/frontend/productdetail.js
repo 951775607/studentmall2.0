@@ -12,7 +12,7 @@ $(function () {
             var product = data.product;
             //给商品信息相关的html控件赋值
             //商品缩略图
-            $('#product-img').attr('src', product.imgAddr);
+            $('#product-img').attr('src', getContextPath()+product.imgAddr);
             //商品更新时间
             $('#product-time').text(
                 new Date(product.lastEditTime)
@@ -40,7 +40,7 @@ $(function () {
             var imgListHtml = '';
             //遍历商品详情图列表，并生成批量的img标签
             product.productImgList.map(function (item, index) {
-                imgListHtml += '<div> <img src="' + item.imgAddr
+                imgListHtml += '<div> <img src="' + getContextPath() + item.imgAddr
                     + '"width="100%"/></div>';
             });
             // 生成购买商品的二维码供商家扫描
