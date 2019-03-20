@@ -51,7 +51,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //		 registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
-		registry.addResourceHandler("/upload/**").addResourceLocations("file:\\F:\\JavaCode\\graduation-design\\upload");
+//		registry.addResourceHandler("/upload/**").addResourceLocations("file:\\F:\\JavaCode\\graduation-design\\upload");
 	}
 	/**
 	 * 定义默认的请求处理器
