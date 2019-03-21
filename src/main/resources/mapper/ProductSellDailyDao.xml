@@ -20,7 +20,7 @@
 	</resultMap>
 	<select id="queryProductSellDailyList" resultMap="productSellDailyResultMap">
 		SELECT
-		psd.product_sell_daily_id,
+		psd.product_id,
 		psd.create_time,
 		psd.total,
 		s.shop_id,
@@ -69,10 +69,10 @@
 	<insert id="insertProductSellDaily" parameterType="com.lhq.studentmall.entity.ProductSellDaily">
 		INSERT
 		INTO
-		tb_product_sell_daily(product_id,shop_id,create_time,total)
+		tb_product_sell_daily
 		(
 		SELECT
-		product_id,shop_id,date_format(create_time,'%Y-%m-%d'),count(product_id)
+		product_id,shop_id,create_time,count(product_id)
 		AS total FROM
 		tb_user_product_map
 		WHERE
@@ -80,7 +80,7 @@
 		date_sub(curdate(),interval 1
 		day) GROUP BY product_id)
 	</insert>
-	<insert id="insertDefaultProductSellDaily">
+	<insert id="insertDefaultProductSellDaily" parameterType="com.lhq.studentmall.entity.ProductSellDaily">
 		INSERT
 		INTO
 		tb_product_sell_daily(product_id,shop_id,create_time,total)

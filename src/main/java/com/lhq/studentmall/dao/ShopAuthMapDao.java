@@ -30,7 +30,7 @@ public interface ShopAuthMapDao {
 	int queryShopAuthCountByShopId(@Param("shopId") long shopId);
 
 	/**
-	 * 新增一条店铺与店员的授权关系
+	 * 新增一条店铺与店员的授权关系1
 	 *
 	 * @param shopAuthMap
 	 * @return effectedNum
@@ -52,8 +52,7 @@ public interface ShopAuthMapDao {
 	 * @param shopId
 	 * @return effectedNum
 	 */
-	int deleteShopAuthMap(@Param("employeeId") long employeeId,
-                          @Param("shopId") long shopId);
+	int deleteShopAuthMap(long shopAuthId);
 
 	/**
 	 * 

@@ -50,7 +50,7 @@ $(function () {
                     + '</div>'
                     + '<div class="shop-classify-img-warp">'
                     // + '<img class="shop-img" src="' + getContextPath() + item.shopCategoryImg + '">'
-                    + '<img class="shop-img" src="' + 'F:/JavaCode/graduation-design' + item.shopCategoryImg + '">'
+                    + '<img class="shop-img" src="' + getContextPath() + item.shopCategoryImg + '">'
                     + '</div>'
                     + '</div>';
 
