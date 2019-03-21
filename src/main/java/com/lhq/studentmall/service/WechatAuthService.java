@@ -2,7 +2,7 @@ package com.lhq.studentmall.service;
 
 
 import com.lhq.studentmall.dto.WechatAuthExecution;
-import com.lhq.studentmall.entity.WechatAuth;
+import com.lhq.studentmall.dto.WechatAuth;
 import com.lhq.studentmall.exceptions.WechatAuthOperationException;
 
 public interface WechatAuthService {

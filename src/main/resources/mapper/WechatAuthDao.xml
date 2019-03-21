@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lhq.studentmall.dao.WechatAuthDao">
-    <resultMap id="wechatAuthResultMap" type="com.lhq.studentmall.entity.WechatAuth">
+    <resultMap id="wechatAuthResultMap" type="com.lhq.studentmall.dto.WechatAuth">
         <id column="wechat_auth_id" property="wechatAuthId"/>
         <result column="open_id" property="openId"/>
         <result column="create_time" property="createTime"/>
@@ -48,7 +48,7 @@
     </select>
 
     <!--查询微信账号-->
-    <insert id="insertWechatAuth" parameterType="com.lhq.studentmall.entity.WechatAuth"
+    <insert id="insertWechatAuth" parameterType="com.lhq.studentmall.dto.WechatAuth"
             useGeneratedKeys="true" keyProperty="wechatAuthId" keyColumn="wechat_auth_id">
         INSERT
         INTO

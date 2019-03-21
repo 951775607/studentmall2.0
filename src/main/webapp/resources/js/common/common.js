@@ -49,7 +49,7 @@ function getQueryString(name) {
  * @returns
  */
 function getContextPath(){
-    return "/student/";
+    return "/student";
 }
 
 

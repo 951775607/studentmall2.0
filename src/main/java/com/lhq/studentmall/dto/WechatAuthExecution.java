@@ -2,7 +2,6 @@ package com.lhq.studentmall.dto;
 
 
 
-import com.lhq.studentmall.entity.WechatAuth;
 import com.lhq.studentmall.enume.WechatAuthStateEnum;
 
 import java.util.List;

@@ -3,7 +3,7 @@ import com.lhq.studentmall.dao.PersonInfoDao;
 import com.lhq.studentmall.dao.WechatAuthDao;
 import com.lhq.studentmall.dto.WechatAuthExecution;
 import com.lhq.studentmall.entity.PersonInfo;
-import com.lhq.studentmall.entity.WechatAuth;
+import com.lhq.studentmall.dto.WechatAuth;
 import com.lhq.studentmall.enume.WechatAuthStateEnum;
 import com.lhq.studentmall.exceptions.WechatAuthOperationException;
 import com.lhq.studentmall.service.WechatAuthService;

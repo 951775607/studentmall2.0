@@ -1,7 +1,7 @@
 package com.lhq.studentmall.dao;
 
 
-import com.lhq.studentmall.entity.WechatAuth;
+import com.lhq.studentmall.dto.WechatAuth;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

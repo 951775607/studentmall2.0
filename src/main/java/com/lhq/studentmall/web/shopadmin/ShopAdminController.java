@@ -81,4 +81,50 @@ public class ShopAdminController {
         return "shop/productmanagement";
     }
 
+
+    /**
+     * 功能描述:转发至店铺授权页面
+     *
+     * @param:
+     * @return:
+     **/
+    @RequestMapping(value = "/shopauthmanagement")
+    public String shopAuthManagement() {
+        return "shop/shopauthmanagement";
+    }
+
+    /**
+     * 功能描述:转发至授权信息修改页面
+     *
+     * @param:
+     * @return:
+     **/
+    @RequestMapping(value = "/shopauthedit")
+    public String shopAuthEdit() {
+        return "shop/shopauthedit";
+    }
+
+
+    /**
+     * 功能描述:转发至操作失败的页面
+     *
+     * @param:
+     * @return:
+     **/
+    @RequestMapping(value = "/operationsuccess", method = RequestMethod.GET)
+    private String operationSuccess() {
+
+        return "shop/operationsuccess";
+    }
+
+    /**
+     * 功能描述:转发至操作成功的页面
+     *
+     * @param:
+     * @return:
+     **/
+    @RequestMapping(value = "/operationfail", method = RequestMethod.GET)
+    private String operationFail() {
+        return "shop/operationfail";
+    }
 }

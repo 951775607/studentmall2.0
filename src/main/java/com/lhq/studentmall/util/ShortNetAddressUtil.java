@@ -1,5 +1,6 @@
 package com.lhq.studentmall.util;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +15,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+/**
+ * 功能描述:转发微信url，精简消息
+ *
+ * @param:
+ * @return:
+ **/
 public class ShortNetAddressUtil {
 	private static Logger log = LoggerFactory.getLogger(ShortNetAddressUtil.class);
 
@@ -30,7 +37,8 @@ public class ShortNetAddressUtil {
 		String tinyUrl = null;
 		try {
 			// 指定百度短链接的接口
-			URL url = new URL("http://dwz.cn/create.php");
+//			URL url = new URL("http://dwz.cn/create.php");
+			URL url = new URL("https://dwz.cn/admin/v2/create");
 			// 建立连接
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			// 设置连接的参数
@@ -123,6 +131,7 @@ public class ShortNetAddressUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
 		getShortURL("https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login");
 	}
 }

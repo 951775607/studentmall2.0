@@ -6,7 +6,7 @@ import com.lhq.studentmall.dto.UserAccessToken;
 import com.lhq.studentmall.dto.WechatAuthExecution;
 import com.lhq.studentmall.dto.WechatUser;
 import com.lhq.studentmall.entity.PersonInfo;
-import com.lhq.studentmall.entity.WechatAuth;
+import com.lhq.studentmall.dto.WechatAuth;
 import com.lhq.studentmall.enume.WechatAuthStateEnum;
 import com.lhq.studentmall.service.PersonInfoService;
 import com.lhq.studentmall.service.WechatAuthService;
@@ -111,7 +111,7 @@ public class WeChatLoginController {
 		if (FRONTEND.equals(roleType)) {
 			return "frontend/index";
 		} else {
-			return "shopadmin/shoplist";
+			return "shop/shoplist";
 		}
 //		if (SHOPEND.equals(roleType)) {
 //			return "/frontend/index";

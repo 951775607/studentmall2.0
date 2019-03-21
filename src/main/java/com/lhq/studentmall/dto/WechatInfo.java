@@ -1,4 +1,4 @@
-package com.lhq.studentmall.entity;
+package com.lhq.studentmall.dto;
 
 /**
  * 用来接收平台二维码的信息

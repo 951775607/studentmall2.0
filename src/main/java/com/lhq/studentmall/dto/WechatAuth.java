@@ -1,4 +1,6 @@
-package com.lhq.studentmall.entity;
+package com.lhq.studentmall.dto;
+
+import com.lhq.studentmall.entity.PersonInfo;
 
 import java.util.Date;
 

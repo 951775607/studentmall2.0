@@ -50,9 +50,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//		 registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
-//		registry.addResourceHandler("/upload/**").addResourceLocations("file:\\F:\\JavaCode\\graduation-design\\upload");
+		// registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:/F:/JavaCode/graduation-design/upload");
 	}
+
 	/**
 	 * 定义默认的请求处理器
 	 */
@@ -151,8 +152,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		InterceptorRegistration loginIR = registry.addInterceptor(new ShopLoginInterceptor());
 		// 配置拦截的路径
 		loginIR.addPathPatterns(interceptPath);
-		/** shopauthmanagement page **/
-//		loginIR.excludePathPatterns("/shopadmin/addshopauthmap");
+		/** shopauthmanagement page 扫描二维码**/
+		loginIR.excludePathPatterns("/shopadmin/addshopauthmap");
 //		/** scan **/
 //		loginIR.excludePathPatterns("/shopadmin/adduserproductmap");
 //		loginIR.excludePathPatterns("/shopadmin/exchangeaward");
@@ -171,8 +172,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		/** shopmanage page **/
 		permissionIR.excludePathPatterns("/shopadmin/shopmanagement");
 		permissionIR.excludePathPatterns("/shopadmin/getshopmanagementinfo");
-//		/** shopauthmanagement page **/
-//		permissionIR.excludePathPatterns("/shopadmin/addshopauthmap");
+		/** shopauthmanagement page 扫描二维码**/
+		permissionIR.excludePathPatterns("/shopadmin/addshopauthmap");
 		/** scan **/
 //		permissionIR.excludePathPatterns("/shopadmin/adduserproductmap");
 //		permissionIR.excludePathPatterns("/shopadmin/exchangeaward");
