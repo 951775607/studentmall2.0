@@ -8,6 +8,7 @@ import com.lhq.studentmall.dao.ShopDao;
 import com.lhq.studentmall.dto.ImageHolder;
 import com.lhq.studentmall.dto.ShopExecution;
 import com.lhq.studentmall.entity.Shop;
+import com.lhq.studentmall.entity.ShopAuthMap;
 import com.lhq.studentmall.enume.ShopStateEnum;
 import com.lhq.studentmall.exceptions.ShopOperationException;
 import com.lhq.studentmall.service.ShopService;
@@ -151,6 +152,26 @@ public class ShopServiceImpl implements ShopService {
                         if (effectedNum <= 0) {
                             throw new ShopOperationException("更新图片地址失败");
                         }
+
+
+                        //执行增加shopAuthMao操作
+                        ShopAuthMap shopAuthMap = new ShopAuthMap();
+                        shopAuthMap.setEmployee(shop.getOwner());
+                        shopAuthMap.setShop(shop);
+                        shopAuthMap.setTitle("老板");
+                        shopAuthMap.setTitleFlag(0);
+                        shopAuthMap.setCreateTime(new Date());
+                        shopAuthMap.setLastEditTime(new Date());
+                        shopAuthMap.setEnableStatus(1);
+                        try {
+                            effectedNum = shopAuthMapDao.insertShopAuthMap(shopAuthMap);
+                            if (effectedNum <= 0) {
+                                throw new ShopOperationException("授权创建失败");
+                            }
+                        } catch (Exception e) {
+                            throw new ShopOperationException("insertShopAuthMap error:" + e.getMessage());
+                        }
+
                     } catch (Exception e) {
                         throw new ShopOperationException("addShopImg error:" + e.getMessage());
                     }
