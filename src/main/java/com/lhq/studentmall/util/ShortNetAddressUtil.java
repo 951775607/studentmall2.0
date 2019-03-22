@@ -132,6 +132,6 @@ public class ShortNetAddressUtil {
 	 */
 	public static void main(String[] args) {
 
-		getShortURL("https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login");
+		getShortURL("https://cloud.baidu.com/doc/ShortVideo/Android-OneSdk/8.5CFlvMuxer.html");
 	}
 }

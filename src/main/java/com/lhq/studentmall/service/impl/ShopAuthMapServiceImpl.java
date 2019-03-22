@@ -85,7 +85,7 @@ public class ShopAuthMapServiceImpl implements ShopAuthMapService {
 					return new ShopAuthMapExecution(ShopAuthMapStateEnum.SUCCESS, shopAuthMap);
 				}
 			} catch (Exception e) {
-				throw new RuntimeException("modifyShopAuthMap error: " + e.getMessage());
+				throw new RuntimeException("更改店铺授权失败: " + e.getMessage());
 			}
 		}
 	}

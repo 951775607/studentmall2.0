@@ -45,7 +45,7 @@ $(function () {
                     });
                     //将拼接好的类别标签嵌入前台的html组件中
                     $('#shoplist-search-div').html(html);
-                    var selectOptions = '<option value="">全部街道</option>';
+                    var selectOptions = '<option value="">全部校区</option>';
                     //获取后台返回过来的区域信息列表
                     var areaList = data.areaList;
                     //遍历区域信息列表，拼接出option标签集

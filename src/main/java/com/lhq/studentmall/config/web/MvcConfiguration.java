@@ -51,7 +51,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
-		registry.addResourceHandler("/upload/**").addResourceLocations("file:/F:/JavaCode/graduation-design/upload");
+		registry.addResourceHandler("/upload/**").addResourceLocations("file:F:/JavaCode/graduation-design/upload");
 	}
 
 	/**
@@ -175,21 +175,21 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		/** shopauthmanagement page 扫描二维码**/
 		permissionIR.excludePathPatterns("/shopadmin/addshopauthmap");
 		/** scan **/
-//		permissionIR.excludePathPatterns("/shopadmin/adduserproductmap");
-//		permissionIR.excludePathPatterns("/shopadmin/exchangeaward");
+		permissionIR.excludePathPatterns("/shopadmin/adduserproductmap");
+		permissionIR.excludePathPatterns("/shopadmin/exchangeaward");
 		/** 超级管理员系统拦截部分 **/
-//		interceptPath = "/superadmin/**";
-		// 注册拦截器
-//		InterceptorRegistration superadminloginIR = registry.addInterceptor(new SuperAdminLoginInterceptor());
-		// 配置拦截的路径
-//		superadminloginIR.addPathPatterns(interceptPath);
-//		superadminloginIR.excludePathPatterns("/superadmin/login");
-//		superadminloginIR.excludePathPatterns("/superadmin/logincheck");
-//		superadminloginIR.excludePathPatterns("/superadmin/main");
-//		superadminloginIR.excludePathPatterns("/superadmin/top");
-//		superadminloginIR.excludePathPatterns("/superadmin/clearcache4area");
-//		superadminloginIR.excludePathPatterns("/superadmin/clearcache4headline");
-//		superadminloginIR.excludePathPatterns("/superadmin/clearcache4shopcategory");
+		interceptPath = "/superadmin/**";
+//		 注册拦截器
+		InterceptorRegistration superadminloginIR = registry.addInterceptor(new SuperAdminLoginInterceptor());
+//		 配置拦截的路径
+		superadminloginIR.addPathPatterns(interceptPath);
+		superadminloginIR.excludePathPatterns("/superadmin/login");
+		superadminloginIR.excludePathPatterns("/superadmin/logincheck");
+		superadminloginIR.excludePathPatterns("/superadmin/main");
+		superadminloginIR.excludePathPatterns("/superadmin/top");
+		superadminloginIR.excludePathPatterns("/superadmin/clearcache4area");
+		superadminloginIR.excludePathPatterns("/superadmin/clearcache4headline");
+		superadminloginIR.excludePathPatterns("/superadmin/clearcache4shopcategory");
 	}
 
 }

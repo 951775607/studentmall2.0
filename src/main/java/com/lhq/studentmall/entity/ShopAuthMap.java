@@ -11,7 +11,7 @@ import java.util.Date;
 public class ShopAuthMap {
     //主键
     private Long shopAuthId;
-    //职称名
+    //职称名，0老板，1员工
     private String title;
     //职称符号（权限控制）
     private Integer titleFlag;

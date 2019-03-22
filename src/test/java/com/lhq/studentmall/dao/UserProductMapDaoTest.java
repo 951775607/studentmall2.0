@@ -23,6 +23,8 @@ import static org.junit.Assert.assertEquals;
 public class UserProductMapDaoTest {
 	@Autowired
 	private UserProductMapDao userProductMapDao;
+	@Autowired
+	private ProductSellDailyDao productSellDailyDao;
 
 	/**
 	 * 测试添加功能
@@ -110,5 +112,15 @@ public class UserProductMapDaoTest {
 //		assertEquals(3, userProductMapList.size());
 		count = userProductMapDao.queryUserProductMapCount(userProductMap);
 //		assertEquals(3, count);
+	}
+
+	/**
+	 * 功能描述:统计昨天商品
+	 *
+	 * @param:
+	 * @return:
+	 **/
+	public void testinserproduct() throws Exception{
+		productSellDailyDao.insertProductSellDaily();
 	}
 }
