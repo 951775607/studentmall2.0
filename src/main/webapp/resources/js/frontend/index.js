@@ -4,6 +4,7 @@ $(function () {
     //访问后台，获取头条列表以及一级类别列表
     $.getJSON(url, function (data) {
         if (data.success) {
+            handleUser(data.user);
             //获取后台传递过来的头条列表
             var headLineList = data.headLineList;
             var swiperHtml = '';
@@ -57,6 +58,8 @@ $(function () {
             });
             //将拼接好的类别赋值给前段HTML控件进行展示
             $('.row').html(categoryHtml);
+            //获取登录的用户名
+
         }
     });
 
@@ -72,4 +75,9 @@ $(function () {
         window.location.href = newUrl;
     });
 
+
+    //获取登录的用户名
+    function handleUser(data) {
+        $('#user-name').text(data.name);
+    }
 });

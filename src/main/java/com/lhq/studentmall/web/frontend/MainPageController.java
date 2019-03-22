@@ -1,6 +1,7 @@
 package com.lhq.studentmall.web.frontend;
 
 import com.lhq.studentmall.entity.HeadLine;
+import com.lhq.studentmall.entity.PersonInfo;
 import com.lhq.studentmall.entity.ShopCategory;
 import com.lhq.studentmall.service.HeadLineService;
 import com.lhq.studentmall.service.ShopCategoryService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +33,15 @@ public class MainPageController {
      **/
     @RequestMapping(value = "/listmainpageinfo", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> listMainPageinfo() {
+    private Map<String, Object> listMainPageinfo(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<ShopCategory> shopCategoryList = new ArrayList<ShopCategory>();
+        PersonInfo user = (PersonInfo) request.getSession().getAttribute("user");
         try {
             //获取一级店铺类别列表（即parentID为空的ShopCategory）
             shopCategoryList = shopCategoryService.getShopategoryList(null);
             modelMap.put("shopCategoryList", shopCategoryList);
+            modelMap.put("user", user);
         } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());

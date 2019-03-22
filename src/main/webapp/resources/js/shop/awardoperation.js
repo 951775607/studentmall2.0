@@ -13,7 +13,7 @@ $(function() {
 		getInfo(awardId);
 		isEdit = true;
 	} else {
-		awardPostUrl = '/o2o/shopadmin/addaward';
+		awardPostUrl = '/student/shopadmin/addaward';
 	}
 	// 获取需要编辑的奖品信息，并赋值给表单
 	function getInfo(id) {

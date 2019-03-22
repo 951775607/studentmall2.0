@@ -1,8 +1,6 @@
 package com.lhq.studentmall.web.shopadmin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
 import com.lhq.studentmall.dto.ShopAuthMapExecution;
 import com.lhq.studentmall.dto.UserAccessToken;
 import com.lhq.studentmall.dto.WechatAuth;
@@ -14,7 +12,6 @@ import com.lhq.studentmall.service.ShopAuthMapService;
 import com.lhq.studentmall.service.WechatAuthService;
 import com.lhq.studentmall.util.CodeUtil;
 import com.lhq.studentmall.util.HttpServletRequestUtil;
-import com.lhq.studentmall.util.ShortNetAddressUtil;
 import com.lhq.studentmall.util.wechat.WechatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +27,6 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -201,13 +197,13 @@ public class ShopAuthManagementController {
 			long timpStamp = System.currentTimeMillis();
 			// 将店铺id和timestamp传入content，赋值到state中，这样微信获取到这些信息后会回传到授权信息的添加方法里
 			// 加上aaa是为了一会的在添加信息的方法里替换这些信息使用
-//			String content = "{aaashopIdaaa:" + shop.getShopId() + ",aaacreateTimeaaa:" + timpStamp + "}";
-//			String content = "{shopId:" + shop.getShopId() + "}";
-			String content = "shopId:" + shop.getShopId();
+			String content = "{aaashopIdaaa:" + shop.getShopId() + ",aaacreateTimeaaa:" + timpStamp + "}";
+//			Long shopId = shop.getShopId();
+
 			try {
 				// 将content的信息先进行base64编码以避免特殊字符造成的干扰，之后拼接目标URL
-//				String longUrl = urlPrefix + authUrl + urlMiddle + URLEncoder.encode(content, "UTF-8") + urlSuffix;
-				String longUrl = urlPrefix + authUrl + urlMiddle + content + urlSuffix;
+				String longUrl = urlPrefix + authUrl + urlMiddle + URLEncoder.encode(content, "UTF-8") + urlSuffix;
+//				String longUrl = urlPrefix + authUrl + urlMiddle + shopId + urlSuffix;
 				modelMap.put("success", true);
 				modelMap.put("quior", longUrl);
 			} catch (Exception e) {
@@ -264,23 +260,26 @@ public class ShopAuthManagementController {
 			// 将用户信息添加进user里
 			request.getSession().setAttribute("user", user);
 			// 解析微信回传过来的自定义参数state,由于之前进行了编码，这里需要解码一下
-//			String qrCodeinfo = new String(
-//					URLDecoder.decode(HttpServletRequestUtil.getString(request, "state"), "UTF-8"));
+			String qrCodeinfo = new String(
+					URLDecoder.decode(HttpServletRequestUtil.getString(request, "state"), "UTF-8"));
 //			String qrCodeinfo = HttpServletRequestUtil.getString(request, "state");
-			String qrCodeinfo = request.getParameter("state");
+//			String qrCodeinfo = request.getParameter("state");
+
+//			long number = Long.parseLong(qrCodeinfo);
 			ObjectMapper mapper = new ObjectMapper();
+
 			WechatInfo wechatInfo = null;
 			try {
 				// 将解码后的内容用aaa去替换掉之前生成二维码的时候加入的aaa前缀，转换成WechatInfo实体类
-//				wechatInfo = mapper.readValue(qrCodeinfo.replace("aaa", "\""), WechatInfo.class);
-				wechatInfo = mapper.readValue(qrCodeinfo, WechatInfo.class);
+				wechatInfo = mapper.readValue(qrCodeinfo.replace("aaa", "\""), WechatInfo.class);
+//				wechatInfo = mapper.readValue(qrCodeinfo, WechatInfo.class);
 			} catch (Exception e) {
 				return "shop/operationfail";
 			}
-//			// 校验二维码是否已经过期
-//			if (!checkQRCodeInfo(wechatInfo)) {
-//				return "shop/operationfail";
-//			}
+			// 校验二维码是否已经过期
+			if (!checkQRCodeInfo(wechatInfo)) {
+				return "shop/operationfail";
+			}
 
 			// 去重校验
 			// 获取该店铺下所有的授权信息
@@ -296,6 +295,7 @@ public class ShopAuthManagementController {
 				ShopAuthMap shopAuthMap = new ShopAuthMap();
 				Shop shop = new Shop();
 				shop.setShopId(wechatInfo.getShopId());
+//				shop.setShopId(number);
 				shopAuthMap.setShop(shop);
 				shopAuthMap.setEmployee(user);
 				shopAuthMap.setTitle("店员");

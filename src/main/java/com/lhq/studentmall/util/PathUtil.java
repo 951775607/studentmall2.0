@@ -58,8 +58,8 @@ public class PathUtil {
         if (os.toLowerCase().startsWith("win")) {
 //            basePath = " F:\\JavaCode\\graduation-design\\image\\";
 //            basePath = winPath;
-//            basePath = "F:/JavaCode/graduation-design";
-            basePath = "F:\\JavaCode\\graduation-design\\studentmall\\src\\main\\resources\\static\\";
+            basePath = "F:/JavaCode/graduation-design";
+//            basePath = "F:\\JavaCode\\graduation-design\\studentmall\\src\\main\\resources\\static\\";
 
         } else {
 //            basePath = linuxPath;

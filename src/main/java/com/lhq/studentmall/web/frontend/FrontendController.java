@@ -64,6 +64,12 @@ public class FrontendController {
         return "frontend/index";
     }
 
+    @RequestMapping(value = "/index2", method = RequestMethod.GET)
+    private String index2() {
+        return "frontend/index2";
+    }
+
+
     @RequestMapping(value = "/mypoint", method = RequestMethod.GET)
     private String myPoint() {
         return "frontend/mypoint";
