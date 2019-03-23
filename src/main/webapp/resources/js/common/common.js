@@ -48,9 +48,15 @@ function getQueryString(name) {
  * 获取项目的ContextPath以便修正图片路由让其正常显示
  * @returns
  */
+//本地访问路径
 function getContextPath(){
-    return "/student";
+    return "/student/static";
 }
+
+//项目访问路径
+// function getContextPath(){
+//     return "/student";
+// }
 
 
 

@@ -33,7 +33,7 @@ import com.google.code.kaptcha.servlet.KaptchaServlet;
  */
 @Configuration
 // 等价于<mvc:annotation-driven/>
-@EnableWebMvc
+//@EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 	// Spring容器
 	private ApplicationContext applicationContext;
@@ -48,11 +48,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 	 * 
 	 * @param registry
 	 */
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		// registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
-		registry.addResourceHandler("/upload/**").addResourceLocations("file:F:/JavaCode/graduation-design/upload");
-	}
+//	@Override
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		// registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
+//		registry.addResourceHandler("/upload/**").addResourceLocations("file:F:/JavaCode/graduation-design/upload");
+//		super.addResourceHandlers(registry);
+//	}
 
 	/**
 	 * 定义默认的请求处理器

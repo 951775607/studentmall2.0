@@ -22,6 +22,7 @@ public class Award {
     private Integer priority;
     private Date createTime;
     private Date expireTime;
+    // 最近一次的更新时间
     private Date lastEditTime;
     //状态码
     private Integer enableStatus;

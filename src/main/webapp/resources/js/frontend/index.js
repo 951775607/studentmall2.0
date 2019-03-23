@@ -4,8 +4,13 @@ $(function () {
     //访问后台，获取头条列表以及一级类别列表
     $.getJSON(url, function (data) {
         if (data.success) {
-            handleUser(data.user);
+
+            if (data.user != null) {
+                handleUser(data.user);
+            }
+
             //获取后台传递过来的头条列表
+
             var headLineList = data.headLineList;
             var swiperHtml = '';
             //遍历头条列表，并拼接出轮播图组
@@ -51,7 +56,8 @@ $(function () {
                     + '</div>'
                     + '<div class="shop-classify-img-warp">'
                     // + '<img class="shop-img" src="' + getContextPath() + item.shopCategoryImg + '">'
-                    + '<img class="shop-img" src="' + getContextPath() + item.shopCategoryImg + '">'
+                    + '<img class="shop-img" src="' + getContextPath() +  item.shopCategoryImg + '">'
+
                     + '</div>'
                     + '</div>';
 
