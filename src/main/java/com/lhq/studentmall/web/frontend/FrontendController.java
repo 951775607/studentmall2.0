@@ -70,11 +70,37 @@ public class FrontendController {
     }
 
 
+
+
+    /**
+     * 店铺的奖品列表页路由
+     *
+     * @return
+     */
+    @RequestMapping(value = "/awardlist", method = RequestMethod.GET)
+    private String showAwardList() {
+        return "frontend/awardlist";
+    }
+
+
+
+
+    /**
+     * 用户各店铺积分信息页路由
+     *
+     * @return
+     */
     @RequestMapping(value = "/mypoint", method = RequestMethod.GET)
     private String myPoint() {
         return "frontend/mypoint";
     }
 
+
+    /**
+     * 消费记录列表页路由
+     *
+     * @return
+     */
     @RequestMapping(value = "/myrecord", method = RequestMethod.GET)
     private String myRecord() {
         return "frontend/myrecord";
@@ -85,6 +111,11 @@ public class FrontendController {
         return "frontend/pointrecord";
     }
 
+    /**
+     * 奖品详情页路由
+     *
+     * @return
+     */
     @RequestMapping(value = "/awarddetail", method = RequestMethod.GET)
     private String awardDetail() {
         return "frontend/awarddetail";
