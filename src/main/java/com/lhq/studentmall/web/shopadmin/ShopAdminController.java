@@ -142,6 +142,12 @@ public class ShopAdminController {
         return "shop/awardmanagement";
     }
 
+    /**
+     * 功能描述:奖品编辑页面
+     *
+     * @param:
+     * @return:
+     **/
     @RequestMapping(value = "/awardoperation", method = RequestMethod.GET)
     private String awardEdit() {
         // 奖品编辑页路由
@@ -154,6 +160,12 @@ public class ShopAdminController {
         return "shop/usershopcheck";
     }
 
+    /**
+     * 功能描述:
+     * 
+     * @param: 店铺用户积分兑换
+     * @return: 
+     **/
     @RequestMapping(value = "/awarddelivercheck", method = RequestMethod.GET)
     private String awardDeliverCheck() {
         // 店铺用户积分兑换路由

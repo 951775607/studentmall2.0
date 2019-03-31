@@ -106,6 +106,12 @@ public class FrontendController {
         return "frontend/myrecord";
     }
 
+    /**
+     * 功能描述:奖品兑换列表页路由
+     *
+     * @param:
+     * @return:
+     **/
     @RequestMapping(value = "/pointrecord", method = RequestMethod.GET)
     private String pointRecord() {
         return "frontend/pointrecord";

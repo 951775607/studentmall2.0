@@ -69,6 +69,13 @@ public class UserAwardMapServiceImpl implements UserAwardMapService {
 		return userAwardMapDao.queryUserAwardMapById(userAwardMapId);
 	}
 
+
+	/**
+	 * 功能描述:添加领取奖品
+	 *
+	 * @param:
+	 * @return:
+	 **/
 	@Override
 	@Transactional
 	public UserAwardMapExecution addUserAwardMap(UserAwardMap userAwardMap) throws RuntimeException {

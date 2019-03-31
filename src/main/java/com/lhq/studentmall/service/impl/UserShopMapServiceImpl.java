@@ -36,6 +36,12 @@ public class UserShopMapServiceImpl implements UserShopMapService {
 
 	}
 
+	/**
+	 * 功能描述:根据传入的用户id查询该用户在某个店铺的积分信息
+	 *
+	 * @param:
+	 * @return:
+	 **/
 	@Override
 	public UserShopMap getUserShopMap(long userId, long shopId) {
 		return userShopMapDao.queryUserShopMap(userId, shopId);
