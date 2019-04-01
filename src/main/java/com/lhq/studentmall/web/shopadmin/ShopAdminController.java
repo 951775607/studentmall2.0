@@ -171,4 +171,16 @@ public class ShopAdminController {
         // 店铺用户积分兑换路由
         return "shop/awarddelivercheck";
     }
+
+    /**
+     * 功能描述:商品详情页路由
+     *
+     * @param:
+     * @return:
+     **/
+    @RequestMapping(value = "/productdetail", method = RequestMethod.GET)
+    private String showProductDetail() {
+        return "shop/productdetail";
+    }
+
 }

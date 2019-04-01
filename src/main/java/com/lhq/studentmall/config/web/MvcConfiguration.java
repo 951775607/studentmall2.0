@@ -178,6 +178,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
 		/** scan **/
 		permissionIR.excludePathPatterns("/shopadmin/adduserproductmap");
 		permissionIR.excludePathPatterns("/shopadmin/exchangeaward");
+		permissionIR.excludePathPatterns("/shopadmin/productdetail");
 		/** 超级管理员系统拦截部分 **/
 		interceptPath = "/superadmin/**";
 //		 注册拦截器
