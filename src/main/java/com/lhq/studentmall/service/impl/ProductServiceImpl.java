@@ -2,6 +2,7 @@ package com.lhq.studentmall.service.impl;
 
 import com.lhq.studentmall.dao.ProductDao;
 import com.lhq.studentmall.dao.ProductImgDao;
+import com.lhq.studentmall.dao.ProductSellDailyDao;
 import com.lhq.studentmall.dto.ImageHolder;
 import com.lhq.studentmall.dto.ProductExecution;
 import com.lhq.studentmall.entity.Product;
@@ -32,6 +33,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
     @Autowired
     private ProductImgDao productImgDao;
+    @Autowired
+    private ProductSellDailyDao productSellDailyDao;
 
 
     /**
@@ -117,6 +120,8 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public void deleteProduct(Product productCondition) {
+        productImgDao.deleteProductImgByProductId(productCondition.getProductId());
+        productSellDailyDao.deleteProductByProductId(productCondition.getProductId(), productCondition.getShop().getShopId());
         productDao.deleteProduct(productCondition.getProductId(), productCondition.getShop().getShopId());
     }
 

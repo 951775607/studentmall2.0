@@ -96,4 +96,14 @@
 													date_sub(curdate(),interval 1 day))
 			)
 	</insert>
+
+	<!--删除商品交易记录-->
+	<delete id="deleteProductByProductId">
+		DELETE
+		FROM
+			tb_product_sell_daily
+		WHERE
+			product_id = #{productId}
+		  AND shop_id = #{shopId}
+	</delete>
 </mapper>

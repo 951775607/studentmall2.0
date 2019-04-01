@@ -4,7 +4,7 @@ $(function () {
     //获取商品信息的url地址
     var productUrl = '/student/frontend/listproductdetailpageinfo?productId='
         + productId;
-
+    qrious();
     //访问后台获取该商品的信息并渲染
     $.getJSON(productUrl, function (data) {
         if (data.success) {
@@ -43,8 +43,8 @@ $(function () {
                 imgListHtml += '<div> <img src="' + getContextPath() + item.imgAddr
                     + '"width="100%"/></div>';
             });
-            // 生成购买商品的二维码供商家扫描
-            // imgListHtml += '<div> <img src="/student/frontend/generateqrcode4product?productId='
+           // 生成购买商品的二维码供商家扫描
+           //  imgListHtml += '<div> <img src="/student/frontend/generateqrcode4product?productId='
             //     + product.productId + '"/></div>';
             $('#imgList').html(imgListHtml);
         }
@@ -54,4 +54,31 @@ $(function () {
         $.openPanel('#panel-left-demo');
     });
     $.init();
+
+
+    // 生成购买商品的二维码供商家扫描
+    function qrious() {
+        $.ajax({
+            url: '/student/frontend/generateqrcode4product?productId=' + productId,
+            type : "get",
+            dataType : "json",
+            success : function(data) {
+                if (data.success) {
+                    //创建qrious对象
+                    var qr = new QRious({
+                        //指定那个元素
+                        element: document.getElementById("qrious"),
+                        //容错级别
+                        level: "Q",
+                        //大小
+                        size: 250,
+                        //值
+                        value: data.quior
+                    });
+                } else {
+                    alert("生成二维码失败！");
+                }
+            }
+        });
+    }
 });

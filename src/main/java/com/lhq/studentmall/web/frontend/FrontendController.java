@@ -127,6 +127,19 @@ public class FrontendController {
         return "frontend/awarddetail";
     }
 
+
+    /**
+     * 奖品详情页路由
+     *
+     * @return
+     */
+    @RequestMapping(value = "/myawarddetail", method = RequestMethod.GET)
+    private String showMyAwardDetail() {
+        return "frontend/myawarddetail";
+    }
+
+
+
     @RequestMapping(value = "/customerbind", method = RequestMethod.GET)
     private String customerBind() {
         return "frontend/customerbind";

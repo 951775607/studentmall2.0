@@ -18,7 +18,7 @@ public interface UserProductMapService {
 
 	/**
 	 * 
-	 * @param userProductMap
+	 * @param userProductMap添加消费记录
 	 * @return
 	 * @throws UserProductMapOperationException
 	 */

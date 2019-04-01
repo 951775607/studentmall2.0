@@ -31,4 +31,7 @@ public interface ProductSellDailyDao {
 	 * @return
 	 */
 	int insertDefaultProductSellDaily();
+
+	int deleteProductByProductId(@Param("productId") long productId,
+								 @Param("shopId") long shopId);
 }
