@@ -9,13 +9,38 @@ import java.util.Date;
 @Mapper
 public interface LocalAuthDao {
 
+    /**
+     * 通过帐号和密码查询对应信息，登录用
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     LocalAuth queryLocalByUserNameAndPwd(@Param("userName") String userName,
                                          @Param("password") String password);
 
+    /**
+     * 通过用户Id查询对应localauth
+     *
+     * @param userId
+     * @return
+     */
     LocalAuth queryLocalByUserId(@Param("userId") long userId);
 
+    /**
+     * 添加平台帐号
+     *
+     * @param localAuth
+     * @return
+     */
     int insertLocalAuth(LocalAuth localAuth);
 
+    /**
+     * 通过userId,username,password更改密码
+     *
+     * @param localAuth
+     * @return
+     */
     int updateLocalAuth(@Param("userId") Long userId,
                         @Param("username") String username,
                         @Param("password") String password,

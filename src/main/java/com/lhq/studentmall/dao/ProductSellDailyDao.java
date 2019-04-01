@@ -32,6 +32,13 @@ public interface ProductSellDailyDao {
 	 */
 	int insertDefaultProductSellDaily();
 
+
+	/**
+	 * 功能描述:删除商品销量，给删除商品的时候时候，不然外键约束无法删除
+	 *
+	 * @param:
+	 * @return:
+	 **/
 	int deleteProductByProductId(@Param("productId") long productId,
 								 @Param("shopId") long shopId);
 }

@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -30,7 +32,42 @@ public class AreaDaoTest {
     @Test
     public void testQueryArea() {
         List<Area> areaList = areaDao.queryArea();
+    }
 
+    @Test
+    public void insertArea() {
+        Area area = new Area();
+        area.setAreaName("旺村");
+        area.setCreateTime(new Date());
+        area.setLastEditTime(new Date());
+        area.setPriority(5);
+        areaDao.insertArea(area);
+    }
+
+
+    @Test
+    public void updateArea() {
+        Area area = new Area();
+        area.setAreaId(6);
+        area.setAreaName("员村");
+        area.setCreateTime(new Date());
+        area.setLastEditTime(new Date());
+        area.setPriority(10);
+        areaDao.updateArea(area);
+    }
+
+    @Test
+    public void deleteArea() {
+        areaDao.deleteArea(6);
+    }
+
+    @Test
+    public void batchDeleteArea() {
+        List<Long> areaIdList = new ArrayList<>();
+        areaIdList.add(7L);
+        areaIdList.add(8L);
+
+        areaDao.batchDeleteArea(areaIdList);
     }
 
 

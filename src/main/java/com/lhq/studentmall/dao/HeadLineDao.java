@@ -26,31 +26,31 @@ public interface HeadLineDao {
      */
     HeadLine queryHeadLineById(long lineId);
 
-    /**
+    /**根据传入的Id列表查询头条信息(供超级管理员选定删除头条的时候用，主要是处理图片)
      * @param lineIdList
      * @return
      */
     List<HeadLine> queryHeadLineByIds(List<Long> lineIdList);
 
-    /**
+    /**插入头条
      * @param headLine
      * @return
      */
     int insertHeadLine(HeadLine headLine);
 
-    /**
+    /**更新头条信息
      * @param headLine
      * @return
      */
     int updateHeadLine(HeadLine headLine);
 
-    /**
+    /**删除头条
      * @param headLineId
      * @return
      */
     int deleteHeadLine(long headLineId);
 
-    /**
+    /**批量删除头条
      * @param lineIdList
      * @return
      */

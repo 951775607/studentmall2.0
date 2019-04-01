@@ -12,7 +12,7 @@ public interface PersonInfoDao {
 
 
 	/**TODO
-	 * 查询用户列表
+	 * 根据查询条件分页返回用户信息列表
 	 * @param personInfoCondition
 	 * @param rowIndex
 	 * @param pageSize
@@ -22,8 +22,9 @@ public interface PersonInfoDao {
             @Param("personInfoCondition") PersonInfo personInfoCondition,
             @Param("rowIndex") int rowIndex, @Param("pageSize") int pageSize);
 
-	/**TODO
-	 *查询用户数量
+	/**
+	 * 根据查询条件返回总数，配合queryPersonInfoList使用
+	 *
 	 * @param personInfoCondition
 	 * @return
 	 */
@@ -45,7 +46,7 @@ public interface PersonInfoDao {
 	int insertPersonInfo(PersonInfo personInfo);
 
 	/**TODO
-	 * 更新用户
+	 * 修改用户
 	 * @param wechatAuth
 	 * @return
 	 */

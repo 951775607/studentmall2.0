@@ -23,4 +23,37 @@ public interface AreaDao {
      * @throws
      */
     List<Area> queryArea();
+
+    /**
+     * 功能描述:插入区域信息
+     *
+     * @param:
+     * @return:
+     **/
+    int insertArea(Area area);
+
+    /**
+     * 功能描述:更新区域信息
+     *
+     * @param:
+     * @return:
+     **/
+    int updateArea(Area area);
+
+    /**
+     * 功能描述:删除区域信息
+     *
+     * @param:
+     * @return:
+     **/
+    int deleteArea(long areaId);
+
+
+    /**
+     * 功能描述:批量删除区域信息
+     *
+     * @param:
+     * @return:
+     **/
+    int batchDeleteArea(List<Long> areaIdList);
 }

@@ -55,7 +55,7 @@ public interface ShopAuthMapDao {
 	int deleteShopAuthMap(long shopAuthId);
 
 	/**
-	 * 
+	 * 通过shopAuthId查询员工授权信息
 	 * @param shopAuthId
 	 * @return
 	 */

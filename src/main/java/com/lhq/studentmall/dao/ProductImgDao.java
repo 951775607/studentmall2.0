@@ -11,12 +11,27 @@ import java.util.List;
 @Mapper
 public interface ProductImgDao {
 
-	//查询商品图片列表
+	/**
+	 * 列出某个商品的详情图列表
+	 *
+	 * @param productId
+	 * @return
+	 */
 	List<ProductImg> queryProductImgList(long productId);
 
-	//批量添加商品详情图片
+	/**
+	 * 批量添加商品详情图片
+	 *
+	 * @param productImgList
+	 * @return
+	 */
 	int batchInsertProductImg(List<ProductImg> productImgList);
 
-	//删除指定商品下代所有详情图
+	/**
+	 * 删除指定商品下的所有详情图
+	 *
+	 * @param productId
+	 * @return
+	 */
 	int deleteProductImgByProductId(long productId);
 }
