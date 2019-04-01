@@ -11,17 +11,19 @@
  * @return
  */
 function doLogin() {
+    var needVerify = false;
+    var logincheck = '/student/local/logincheck';
 	var validateResult = true;
 	// easyui 表单验证
-	$('#loginTable input').each(function() {
-		if ($(this).attr('required') || $(this).attr('validType')) {
-			if (!$(this).validatebox('isValid')) {
-				// 如果验证不通过，则返回false
-				validateResult = false;
-				return;
-			}
-		}
-	});
+	// $('#loginTable input').each(function() {
+	// 	if ($(this).attr('required') || $(this).attr('validType')) {
+	// 		if (!$(this).validatebox('isValid')) {
+	// 			// 如果验证不通过，则返回false
+	// 			validateResult = false;
+	// 			return;
+	// 		}
+	// 	}
+	// });
 	if (validateResult == false) {
 		// 如果验证不通过，则不执行登录操作
 		return;
@@ -33,10 +35,13 @@ function doLogin() {
 		cache : false,
 		type : "post",
 		dataType : 'json',
-		url : "logincheck",// 请求的action路径
+		url : logincheck,// 请求的action路径
 		data : {
 			userName : $("#userName").val(),
-			password : $("#password").val()
+			password : $("#password").val(),
+            // verifyCodeActual:verifyCodeActual,
+            //需要验证
+            needVerify:needVerify
 		},
 		error : function() {// 请求失败处理函数
 			alert('请求失败');
