@@ -34,7 +34,6 @@ public class DESUtils {
 			throw new RuntimeException(e);
 		}
 	}
-
 	//获取加密后的信息
 	public static String getEncryptString(String str) {
 		//基于BASE64编码

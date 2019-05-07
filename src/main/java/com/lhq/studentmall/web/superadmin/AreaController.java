@@ -1,7 +1,10 @@
 package com.lhq.studentmall.web.superadmin;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lhq.studentmall.dto.AreaExecution;
 import com.lhq.studentmall.entity.Area;
+import com.lhq.studentmall.enume.AreaStateEnum;
 import com.lhq.studentmall.service.AreaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +35,11 @@ public class AreaController {
     @Autowired
     private AreaService areaService;
 
+    /**获取所有的区域信息
+     *
+     *
+     * @return
+     */
     @RequestMapping(value = "/listarea",method = RequestMethod.GET)
     @ResponseBody
     private Map<String, Object> listArea(){
@@ -54,5 +64,134 @@ public class AreaController {
         logger.info("===end===");
         return modelMap;
     }
+
+    /**
+     * 添加区域信息
+     *
+     * @param areaStr
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/addarea", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> addArea(String areaStr, HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        ObjectMapper mapper = new ObjectMapper();
+        Area area = null;
+        try {
+            // 接收前端传递过来的area json字符串信息并转换成Area实体类实例
+            area = mapper.readValue(areaStr, Area.class);
+            // decode可能有中文的地方
+            area.setAreaName((area.getAreaName() == null) ? null : URLDecoder.decode(area.getAreaName(), "UTF-8"));
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+        // 空值判断
+        if (area != null && area.getAreaName() != null) {
+            try {
+                // 添加区域信息
+                AreaExecution ae = areaService.addArea(area);
+                if (ae.getState() == AreaStateEnum.SUCCESS.getState()) {
+                    modelMap.put("success", true);
+                } else {
+                    modelMap.put("success", false);
+                    modelMap.put("errMsg", ae.getStateInfo());
+                }
+            } catch (RuntimeException e) {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", e.toString());
+                return modelMap;
+            }
+
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "请输入区域信息");
+        }
+        return modelMap;
+    }
+
+    /**
+     * 修改区域信息，主要修改名字
+     *
+     * @param areaStr
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/modifyarea", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> modifyArea(String areaStr, HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        ObjectMapper mapper = new ObjectMapper();
+        Area area = null;
+        try {
+            // 接收前端传递过来的area json字符串信息并转换成Area实体类实例
+            area = mapper.readValue(areaStr, Area.class);
+            area.setAreaName((area.getAreaName() == null) ? null : URLDecoder.decode(area.getAreaName(), "UTF-8"));
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+        // 空值判断
+        if (area != null && area.getAreaId() != null) {
+            try {
+                // 修改区域信息
+                AreaExecution ae = areaService.modifyArea(area);
+                if (ae.getState() == AreaStateEnum.SUCCESS.getState()) {
+                    modelMap.put("success", true);
+                } else {
+                    modelMap.put("success", false);
+                    modelMap.put("errMsg", ae.getStateInfo());
+                }
+            } catch (RuntimeException e) {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", e.toString());
+                return modelMap;
+            }
+
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "请输入区域信息");
+        }
+        return modelMap;
+    }
+
+
+    /**
+     * 删除区域信息
+     *
+     * @param areaStr
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/removearea", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> removearea(Integer areaId, HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        // 空值判断
+        if (areaId != null) {
+            try {
+                // 删除区域信息
+                int i = areaService.delArea(areaId);
+                if (i > 0) {
+                    modelMap.put("success", true);
+                } else {
+                    modelMap.put("success", false);
+                }
+            } catch (RuntimeException e) {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", e.toString());
+                return modelMap;
+            }
+
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "删除失败");
+        }
+        return modelMap;
+    }
+
 
 }

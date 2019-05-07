@@ -71,6 +71,7 @@ function optFormater(value, row, index) {
     var priority = row.priority;
     var params = areaId + ",'" + areaName + "'," + priority;
     var edit = '<a href="javascript:openDialog_edit(' + params + ')">编辑</a>';
+    edit += '<a href="javascript:doDel(' + areaId + ')">&nbsp&nbsp&nbsp&nbsp删除</a>';
     return edit;
 };
 
@@ -139,6 +140,7 @@ function areaManagementAddReset() {
     $("#areaManagementAdd_message").html("");
     $("#areaManagementAdd_areaName").val("");
     $("#areaManagementAdd_priority").val("");
+    $("#areaManagementAdd_areaDesc").val("");
 }
 
 /** --------------编辑操作弹出框------------------* */
@@ -240,6 +242,19 @@ function changeStatus(url) {
         }
     });
 }
+function deleteArea(areaId) {
+    $.ajax({
+        url : "removearea",
+        dataType : "json",
+        data : {
+            areaId : areaId
+        },
+        success : function(data) {
+            alert("删除成功")
+        }
+    });
+}
+
 
 /**
  * 批量操作

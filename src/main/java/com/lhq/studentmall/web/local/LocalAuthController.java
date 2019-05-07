@@ -150,19 +150,14 @@ public class LocalAuthController {
         }
         //获取账号
         String userName = HttpServletRequestUtil.getString(request, "userName");
-
         //获取原密码
         String password = HttpServletRequestUtil.getString(request, "password");
-
         //获取新密码
         String newPassword = HttpServletRequestUtil.getString(request, "newPassword");
-
         //获取当前用户信息，一旦通过微信登录就能获取
         PersonInfo user = (PersonInfo) request.getSession().getAttribute("user");
-
         //账号新旧密码，当前用户以及新旧密码不能相同
         if (userName != null && password != null) {
-
             //根据传入的账号密码去获取平台信息
             LocalAuth localAuth = localAuthService.getLocalAuthByUserNameAndPwd(userName, password);
             if (localAuth != null) {
