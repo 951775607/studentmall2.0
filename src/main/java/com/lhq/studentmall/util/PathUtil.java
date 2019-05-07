@@ -90,6 +90,16 @@ public class PathUtil {
         return shopImagePath;
     }
 
+    public static String getHeadLineImagePath() {
+        String basePath = "";
+        basePath = "F:\\JavaCode\\graduation-design\\studentmall\\src\\main\\resources\\static\\";
+        return basePath.replace("/", seperator);
+    }
+    public static String getShopCategoryPath() {
+        String shopCategoryPath = "";
+        shopCategoryPath = "/upload/images/";
+        return shopCategoryPath.replace("/", seperator);
+    }
     public static String getRandomFileName() {
         // 生成随机文件名：当前年月日时分秒+五位随机数（为了在实际项目中防止文件同名而进行的处理）
         int rannum = (int) (r.nextDouble() * (99999 - 10000 + 1)) + 10000; // 获取随机数

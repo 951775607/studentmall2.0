@@ -49,7 +49,7 @@ public class ShopListController {
                 ShopCategory parent = new ShopCategory();
                 parent.setShopCategoryId(parentId);
                 shopCategoryCondition.setParent(parent);
-                shopCategoryList = shopCategoryService.getShopategoryList(shopCategoryCondition);
+                shopCategoryList = shopCategoryService.getShopCategoryList(shopCategoryCondition);
             } catch (Exception e) {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", e.getMessage());
@@ -57,7 +57,7 @@ public class ShopListController {
         } else {
             //如果parentId不存在，则取出所有一级ShopCategory（用户在首页选择的是全部商品列表）
             try {
-                shopCategoryList = shopCategoryService.getShopategoryList(null);
+                shopCategoryList = shopCategoryService.getShopCategoryList(null);
             } catch (Exception e) {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", e.toString());

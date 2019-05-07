@@ -28,6 +28,8 @@
 	src="../resources/js/superadmin/common/errorhandle.js"></script>
 <script type="text/javascript"
 	src="../resources/js/superadmin/shopcategorymanage.js"></script>
+<script type="text/javascript"
+	src="../resources/js/superadmin/common/commonutil.js"></script>
 </head>
 
 <body>
@@ -36,13 +38,14 @@
 		cellspacing="0" cellpadding="0" iconCls="icon-edit" width="98%"
 		idField="shopCategoryId" pagination="false" remoteSort="false"
 		singleSelect="false" showFooter="false" striped="true">
-		<thead>
+		<thead id="tableId">
 			<tr align="center">
-				<th field="ck" width="20" checkbox="true" width="20"></th>
+				<!--<th field="ck" width="20" checkbox="true" width="20"></th>-->
 				<th field="shopCategoryId" width="100">类别Id</th>
 				<th field="shopCategoryName" width="100">类别名称</th>
 				<th field="shopCategoryDesc" width="200">类别描述</th>
-				<th field="parentId" width="100">上级类别Id</th>
+				<!--<th field="parentId" width="100">上级类别Id</th>-->
+				<th field="parentId" formatter='optFormaterParentId' width="100">上级类别Id</th>
 				<th field="shopCategoryImg" width="120" formatter="imgFormater">类别图片</th>
 				<th field="priority" width="100">优先级</th>
 				<th field="createTime" width="150">创建时间</th>

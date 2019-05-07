@@ -39,7 +39,7 @@ public class MainPageController {
         PersonInfo user = (PersonInfo) request.getSession().getAttribute("user");
         try {
             //获取一级店铺类别列表（即parentID为空的ShopCategory）
-            shopCategoryList = shopCategoryService.getShopategoryList(null);
+            shopCategoryList = shopCategoryService.getShopCategoryList(null);
             modelMap.put("shopCategoryList", shopCategoryList);
             modelMap.put("user", user);
         } catch (Exception e) {

@@ -8,6 +8,7 @@ function listShopCategoryManagementInfo() {
 		type : "post",
 		dataType : 'json',
 		success : function(data) {
+			console.log(data)
 			$('#shopCategoryManagementTable').datagrid('loadData', data);
 		}
 	});
@@ -27,29 +28,32 @@ function initializePage() {
 		type : "post",
 		dataType : 'json',
 		success : function(data) {
-			var shopCategoryList = data.data;
-			if ((shopCategoryList != undefined)
-					&& (shopCategoryList.length > 0)) {
-				var shopCategoryBuffer = new StringBuffer();
-				/**
-				 * <option value="shopCategoryId">shopCategoryName</option>
-				 */
-				for (var i = 0; i < shopCategoryList.length; i++) {
-					shopCategoryBuffer.append('<option value="');
-					shopCategoryBuffer
-							.append(shopCategoryList[i].shopCategoryId);
-					shopCategoryBuffer.append('">');
-					shopCategoryBuffer
-							.append(shopCategoryList[i].shopCategoryName);
-					shopCategoryBuffer.append('</option>');
-				}
-				shopCategoryBuffer.append('<option value=""></option>');
-				$("#shopCategoryManagementAdd_parentId").append(
-						shopCategoryBuffer.toString());
-				$("#shopCategoryManagementEdit_parentId").append(
-						shopCategoryBuffer.toString());
-				$("#shopCategoryManagementAdd_parentId").val("");
-			}
+			// var shopCategoryList = data.data;
+			var shopCategoryList = data.rows;
+            if ((shopCategoryList != undefined)
+                && (shopCategoryList.length > 0)) {
+                var shopCategoryBuffer = new StringBuffer();
+                /**
+                 * <option value="shopCategoryId">shopCategoryName</option>
+                 */
+                for (var i = 0; i < shopCategoryList.length; i++) {
+                    shopCategoryBuffer.append('<option value="');
+                    shopCategoryBuffer
+                        .append(shopCategoryList[i].shopCategoryId);
+                    shopCategoryBuffer.append('">');
+                    shopCategoryBuffer
+                        .append(shopCategoryList[i].shopCategoryName);
+                    shopCategoryBuffer.append('</option>');
+                }
+                shopCategoryBuffer.append('<option value=""></option>');
+                $("#shopCategoryManagementAdd_parentId").append(
+                    shopCategoryBuffer.toString());
+                $("#shopCategoryManagementEdit_parentId").append(
+                    shopCategoryBuffer.toString());
+                $("#shopCategoryManagementAdd_parentId").val("");
+            } else {
+            	alert("获取店铺类别失败！")
+            }
 		}
 	});
 }
@@ -69,11 +73,11 @@ function ajaxTable() {
 						openDialog_add();
 					}
 				}, '-', {
-					text : '批量删除',
-					iconCls : 'icon-cancel',
-					handler : function() {
-						batch('delete');
-					}
+					// text : '批量删除',
+					// iconCls : 'icon-cancel',
+					// handler : function() {
+					// 	batch('delete');
+					// }
 				} ],
 				loadMsg : '数据加载中,请稍后...',
 				onLoadError : function() {
@@ -97,7 +101,7 @@ function ajaxTable() {
 }
 function imgFormater(value, row, index) {
 	var shopCategoryImg = row.shopCategoryImg;
-	return '<img src="' + shopCategoryImg + '" width="100px" height="60px">';
+	return '<img src="' + getContextPath() + shopCategoryImg + '" width="100px" height="60px">';
 }
 /**
  * 设置操作列的信息 参数说明 value 这个可以不管，但是要使用后面 row 和index 这个参数是必须的 row 当前行的数据 index
@@ -107,13 +111,22 @@ function optFormater(value, row, index) {
 	var shopCategoryId = row.shopCategoryId;
 	var shopCategoryName = row.shopCategoryName;
 	var shopCategoryDesc = row.shopCategoryDesc;
-	var parentId = row.parentId;
+	var parentId = row.parent.shopCategoryId;
 	var priority = row.priority;
 	var params = shopCategoryId + ",'" + shopCategoryName + "','"
 			+ shopCategoryDesc + "'," + parentId + "," + priority;
 	var edit = '<a href="javascript:openDialog_edit(' + params + ')">编辑</a> | ';
 	var del = '<a href="#" onclick="doDel(' + shopCategoryId + ')">删除</a>';
 	return edit + del;
+};
+
+function optFormaterParentId(value, row, index) {
+    if (row.parent.shopCategoryId == null) {
+    	return "无"
+    } else {
+        // return row.parent.shopCategoryId;
+        return row.parent.shopCategoryName;
+    }
 };
 
 /** --------------添加操作弹出框------------------* */
@@ -163,7 +176,10 @@ function shopCategoryManagementAdd() {
 			"#shopCategoryManagementAdd_shopCategoryName").val());
 	shopCategory.shopCategoryDesc = encodeURIComponent($(
 			"#shopCategoryManagementAdd_shopCategoryDesc").val());
-	shopCategory.parentId = $("#shopCategoryManagementAdd_parentId").val();
+    shopCategory.parent = {
+        shopCategoryId: $("#shopCategoryManagementAdd_parentId").val()
+    };
+    // shopCategory.parentId = $("#shopCategoryManagementAdd_parentId").val();
 	shopCategory.priority = $("#shopCategoryManagementAdd_priority").val();
 	var options = {
 		type : 'post',
@@ -253,7 +269,10 @@ function shopCategoryManagementEdit() {
 			"#shopCategoryManagementEdit_shopCategoryName").val());
 	shopCategory.shopCategoryDesc = encodeURIComponent($(
 			"#shopCategoryManagementEdit_shopCategoryDesc").val());
-	shopCategory.parentId = $("#shopCategoryManagementEdit_parentId").val();
+	// shopCategory.parentId = $("#shopCategoryManagementEdit_parentId").val();
+    shopCategory.parent = {
+        shopCategoryId: $("#shopCategoryManagementAdd_parentId").val()
+    };
 	shopCategory.priority = $("#shopCategoryManagementEdit_priority").val();
 	var options = {
 		type : 'post',
@@ -299,7 +318,7 @@ function changeStatus(url) {
 			alert('请求失败');
 		},
 		success : function() {
-			alert("操作成功");
+			// alert("操作成功");
 			listShopCategoryManagementInfo();
 		}
 	});

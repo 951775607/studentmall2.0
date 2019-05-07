@@ -17,7 +17,8 @@
             <result column="shop_category_name" property="shopCategoryName" />
         </association>
     </resultMap>
-    <select id="queryShopCategory" resultType="com.lhq.studentmall.entity.ShopCategory">
+    <!--<select id="queryShopCategory" resultType="com.lhq.studentmall.entity.ShopCategory">&#45;&#45; -->
+    <select id="queryShopCategory" resultMap="shopCategoryMap">
         select
         shop_category_id,
         shop_category_name,
