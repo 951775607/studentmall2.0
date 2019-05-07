@@ -66,7 +66,8 @@ public class ShopServiceImpl implements ShopService {
         } else {
             //1.判断是否需要处理图片,如果已经存在的话，则删除以前的照片重新上传
             try {
-                if (thumbnail.getImage() != null && thumbnail.getImageName() != null && !"".equals(thumbnail.getImageName())) {
+                if (thumbnail != null && thumbnail.getImage() != null && thumbnail.getImageName() != null && !"".equals(thumbnail.getImageName())) {
+
                     Shop tempShop = shopDao.queryByShopId(shop.getShopId());
                     System.out.println("modifyShop需要删除的照片地址为：" + tempShop.getShopImg());
                     if (tempShop.getShopImg() != null) {
@@ -132,8 +133,8 @@ public class ShopServiceImpl implements ShopService {
         }
 
         try {
-            //店铺初始状态
-            shop.setEnableStatus(0);
+            //店铺初始状态  1.启用  0.待审核  2.禁用
+            shop.setEnableStatus(2);
             shop.setAdvice("审核中");
             shop.setCreateTime(new Date());
             shop.setLastEditTime(new Date());

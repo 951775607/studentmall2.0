@@ -42,11 +42,11 @@ function ajaxTable() {
                     openDialog_add();
                 }
             }, '-', {
-                text : '批量删除',
-                iconCls : 'icon-cancel',
-                handler : function() {
-                    batch('delete');
-                }
+                // text : '批量删除',
+                // iconCls : 'icon-cancel',
+                // handler : function() {
+                //     batch('delete');
+                // }
             } ],
 
             loadMsg : '数据加载中,请稍后...',
@@ -90,7 +90,7 @@ function changeFilterStatus(status) {
 
 function imgFormater(value, row, index) {
     var lineImg = row.lineImg;
-    return '<img src="' + lineImg + '" width="100px" height="60px">';
+    return '<img src="' + getContextPath() + lineImg + '" width="100px" height="60px">';
 }
 /**
  * 设置操作列的信息 参数说明 value 这个可以不管，但是要使用后面 row 和index 这个参数是必须的 row 当前行的数据 index
@@ -173,7 +173,7 @@ function headTitleManagementAdd() {
         success : function() {
             var messgage = "添加成功!";
             listHeadTitleManagementInfo();
-
+            closeDialog_add();
             $("#headTitleManagementAdd_message").html(messgage);
         }
     };
@@ -265,6 +265,7 @@ function headTitleManagementEdit() {
         success : function() {
             var messgage = "修改成功!";
             listHeadTitleManagementInfo();
+            closeDialog_edit();
             $("#headTitleManagementEdit_message").html(messgage);
         }
     };
@@ -298,7 +299,7 @@ function changeStatus(url) {
             alert('请求失败');
         },
         success : function() {
-            alert("操作成功");
+            // alert("操作成功");
             listHeadTitleManagementInfo();
         }
     });

@@ -4,8 +4,19 @@
 			iconCls:'icon-back',
 			handler: function(){
 				$.messager.confirm('注销提示', '你确定注销吗?', function(r){
+                    $.ajax({
+                        url : "/student/superadmin/logout",
+                        type : 'POST',
+                        data : {},
+                        dataType : 'json',
+                        success : function(data) {
+                            if (data.success) {
+                                window.location = '/student/superadmin/login';
+                            }
+                        }
+                    });
 					if(r){
-						window.location = root+'/login/doLogout.jhtml';
+						// window.location = root+'/login/doLogout.jhtml';
 					}
 				});
 			}
@@ -32,4 +43,7 @@ function addTab(tabId,title,url){
 		});
 	}
 }
-
+$('#adminLogout').click(function() {
+    alert("222")
+    // window.location.href = '/student/shopadmin/awardoperation';
+});

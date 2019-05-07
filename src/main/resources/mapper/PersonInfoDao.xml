@@ -7,36 +7,22 @@
 		SELECT
 		user_id,
 		name,
-		birthday,
 		gender,
-		phone,
 		email,
 		profile_img,
-		customer_flag,
-		shop_owner_flag,
-		admin_flag,
+		user_type,
 		create_time,
 		last_edit_time,
 		enable_status
 		FROM
 		tb_person_info
 		<where>
-			<if test="personInfoCondition.customerFlag != null">
-				and customer_flag = #{personInfoCondition.customerFlag}
-			</if>
-			<if test="personInfoCondition.shopOwnerFlag != null">
-				and shop_owner_flag =
-				#{personInfoCondition.shopOwnerFlag}
-			</if>
-			<if test="personInfoCondition.adminFlag != null">
-				and admin_flag = #{personInfoCondition.adminFlag}
-			</if>
-			<!-- 写like语句的时候 一般都会写成 like '% %' 在mybatis里面写就是应该是 like '%${name} %' 而不是 
+			<!-- 写like语句的时候 一般都会写成 like '% %' 在mybatis里面写就是应该是 like '%${name} %' 而不是
 				'%#{name} %' ${name} 是不带单引号的，而#{name} 是带单引号的 -->
-			<if test="personInfoCondition.name != null">
+			<if test="personInfoCondition != null and personInfoCondition.name != null">
 				and name like '%${personInfoCondition.name}%'
 			</if>
-			<if test="personInfoCondition.enableStatus != null">
+			<if test="personInfoCondition != null and personInfoCondition.enableStatus != null">
 				and enable_status = #{personInfoCondition.enableStatus}
 			</if>
 		</where>
@@ -50,22 +36,12 @@
 		FROM
 		tb_person_info
 		<where>
-			<if test="personInfoCondition.customerFlag!=null">
-				and customer_flag = #{personInfoCondition.customerFlag}
-			</if>
-			<if test="personInfoCondition.shopOwnerFlag!=null">
-				and shop_owner_flag =
-				#{personInfoCondition.shopOwnerFlag}
-			</if>
-			<if test="personInfoCondition.adminFlag!=null">
-				and admin_flag = #{personInfoCondition.adminFlag}
-			</if>
-			<!-- 写like语句的时候 一般都会写成 like '% %' 在mybatis里面写就是应该是 like '%${name} %' 而不是 
+			<!-- 写like语句的时候 一般都会写成 like '% %' 在mybatis里面写就是应该是 like '%${name} %' 而不是
 				'%#{name} %' ${name} 是不带单引号的，而#{name} 是带单引号的 -->
-			<if test="personInfoCondition.name!=null">
+			<if test="personInfoCondition != null and personInfoCondition.name!=null">
 				and name like '%${personInfoCondition.name}%'
 			</if>
-			<if test="personInfoCondition.enableStatus!=null">
+			<if test="personInfoCondition != null and personInfoCondition.enableStatus!=null">
 				and enable_status = #{personInfoCondition.enableStatus}
 			</if>
 		</where>
@@ -104,14 +80,10 @@
 		update tb_person_info
 		<set>
 			<if test="name != null">name=#{name},</if>
-			<if test="birthday != null">birthday=#{birthday},</if>
 			<if test="gender != null">gender=#{gender},</if>
-			<if test="phone != null">phone=#{phone},</if>
 			<if test="email != null">email=#{email},</if>
 			<if test="profileImg != null">profile_img=#{profileImg},</if>
-			<if test="customerFlag != null">customer_flag=#{customerFlag},</if>
-			<if test="shopOwnerFlag != null">shop_owner_flag=#{shopOwnerFlag},</if>
-			<if test="adminFlag != null">admin_flag=#{adminFlag},</if>
+			<if test="userType != null">user_type=#{userType},</if>
 			<if test="lastEditTime != null">last_edit_time=#{lastEditTime},</if>
 			<if test="enableStatus != null">enable_status=#{enableStatus}</if>
 		</set>

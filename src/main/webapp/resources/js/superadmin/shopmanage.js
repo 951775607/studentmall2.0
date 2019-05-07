@@ -2,6 +2,17 @@
     initializePage();
 });
 
+function listAreaManagementInfo() {
+    $.ajax({
+        url : "listshops",
+        type : "get",
+        dataType : 'json',
+        success : function(data) {
+            $('#shopManagementTable').datagrid('loadData', data);
+        }
+    });
+}
+
 function initializePage() {
     // 加载表格数据
     ajaxTable();
@@ -157,9 +168,9 @@ function ajaxTable() {
     enableStatusBuffer
         .append('<option id="shopManagementFilter_YES" value="1">启用</option>');
     enableStatusBuffer
-        .append('<option id="shopManagementFilter_APPLY" value="2">待审核</option>');
+        .append('<option id="shopManagementFilter_APPLY" value="0">待审核</option>');
     enableStatusBuffer
-        .append('<option id="shopManagementFilter_NO" value="0">禁用</option></select>');
+        .append('<option id="shopManagementFilter_NO" value=2>禁用</option></select>');
     var shopCategoryBuffer = new StringBuffer()
     shopCategoryBuffer
         .append('<select id="shopManagementFilter_shopCategory" class="easyui-combobox" style="margin :2px; padding :4px;" ');
@@ -374,8 +385,7 @@ function shopManagementEdit() {
     shop.priority = encodeURIComponent($("#shopManagementEdit_priority").val());
     shop.enableStatus = encodeURIComponent($("#shopManagementEdit_enableStatus")
         .val());
-    shop.advice = '"'
-        + encodeURIComponent($("#shopManagementEdit_advice").val()) + '"';
+    shop.advice = encodeURIComponent($("#shopManagementEdit_advice").val());
     $.ajax({
         async : false,
         cache : false,
@@ -391,6 +401,7 @@ function shopManagementEdit() {
         success : function() {
             var messgage = "修改成功!";
             searchShopInfo();
+            closeDialog_edit();
             $("#shopManagementEdit_message").html(messgage);
         }
     });

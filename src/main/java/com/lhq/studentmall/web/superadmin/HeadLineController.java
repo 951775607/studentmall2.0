@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lhq.studentmall.dto.ConstantForSuperAdmin;
 import com.lhq.studentmall.dto.HeadLineExecution;
 import com.lhq.studentmall.dto.ImageHolder;
+import com.lhq.studentmall.dto.ShopCategoryExecution;
 import com.lhq.studentmall.entity.HeadLine;
 import com.lhq.studentmall.enume.HeadLineStateEnum;
 import com.lhq.studentmall.service.HeadLineService;
@@ -76,9 +77,9 @@ public class HeadLineController {
 		HeadLine headLine = null;
 		// 接收并转化相应的参数，包括头条信息以及图片信息
 		String headLineStr = HttpServletRequestUtil.getString(request, "headLineStr");
-		ImageHolder thumbnail = null;
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-				request.getSession().getServletContext());
+//		ImageHolder thumbnail = null;
+//		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+//				request.getSession().getServletContext());
 		try {
 			headLine = mapper.readValue(headLineStr, HeadLine.class);
 		} catch (Exception e) {
@@ -88,25 +89,50 @@ public class HeadLineController {
 		}
 		// 咱们的请求中都带有multi字样，因此没法过滤，只是用来拦截外部非图片流的处理，
 		// 里边有缩略图的空值判断，请放心使用
-		try {
-			if (multipartResolver.isMultipart(request)) {
-				thumbnail = handleImage(request, thumbnail, "headTitleManagementAdd_lineImg");
-			}
-		} catch (Exception e) {
+//		try {
+//			if (multipartResolver.isMultipart(request)) {
+//				thumbnail = handleImage(request, thumbnail, "headTitleManagementAdd_lineImg");
+//			}
+//		} catch (Exception e) {
+//			modelMap.put("success", false);
+//			modelMap.put("errMsg", e.toString());
+//			return modelMap;
+//		}
+
+		MultipartHttpServletRequest multipartRequest = null;
+		//1.2接收图片,srping自带的上传工具
+		CommonsMultipartFile headTitleManagementAdd_lineImg = null;
+		//1.3文件上传解析器
+		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		//1.4判断是否是流文件类型并转换
+		if (commonsMultipartResolver.isMultipart(request)) {
+			multipartRequest = (MultipartHttpServletRequest) request;
+			headTitleManagementAdd_lineImg = (CommonsMultipartFile) multipartRequest.getFile("headTitleManagementAdd_lineImg");
+		} else {
 			modelMap.put("success", false);
-			modelMap.put("errMsg", e.toString());
+			modelMap.put("errMsg", "上传图片不能为空！");
 			return modelMap;
 		}
+
 		// 空值判断
-		if (headLine != null && thumbnail != null) {
+		if (headLine != null && headTitleManagementAdd_lineImg != null) {
 			try {
 				// decode可能有中文的地方
 				headLine.setLineName(
 						(headLine.getLineName() == null) ? null : URLDecoder.decode(headLine.getLineName(), "UTF-8"));
 				headLine.setLineLink(
 						(headLine.getLineLink() == null) ? null : URLDecoder.decode(headLine.getLineLink(), "UTF-8"));
+
 				// 添加头条信息
-				HeadLineExecution ae = headLineService.addHeadLine(headLine, thumbnail);
+				HeadLineExecution ae;
+				if (headTitleManagementAdd_lineImg != null) {
+					ImageHolder imageHolder = new ImageHolder(headTitleManagementAdd_lineImg.getOriginalFilename(), headTitleManagementAdd_lineImg.getInputStream());
+					ae = headLineService.addHeadLine(headLine, imageHolder);
+				} else {
+					ae = headLineService.addHeadLine(headLine, null);
+				}
+//				HeadLineExecution ae = headLineService.addHeadLine(headLine, headTitleManagementAdd_lineImg);
 				if (ae.getState() == HeadLineStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
 				} else {
@@ -140,9 +166,9 @@ public class HeadLineController {
 		HeadLine headLine = null;
 		// 接收并转化相应的参数，包括头条信息以及图片信息
 		String headLineStr = HttpServletRequestUtil.getString(request, "headLineStr");
-		ImageHolder thumbnail = null;
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-				request.getSession().getServletContext());
+//		ImageHolder thumbnail = null;
+//		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+//				request.getSession().getServletContext());
 		try {
 			headLine = mapper.readValue(headLineStr, HeadLine.class);
 		} catch (Exception e) {
@@ -152,13 +178,28 @@ public class HeadLineController {
 		}
 		// 咱们的请求中都带有multi字样，因此没法过滤，只是用来拦截外部非图片流的处理，
 		// 里边有缩略图的空值判断，请放心使用
-		try {
-			if (multipartResolver.isMultipart(request)) {
-				thumbnail = handleImage(request, thumbnail, "headTitleManagementEdit_lineImg");
-			}
-		} catch (Exception e) {
+//		try {
+//			if (multipartResolver.isMultipart(request)) {
+//				thumbnail = handleImage(request, thumbnail, "headTitleManagementEdit_lineImg");
+//			}
+//		} catch (Exception e) {
+//			modelMap.put("success", false);
+//			modelMap.put("errMsg", e.toString());
+//			return modelMap;
+//		}
+		MultipartHttpServletRequest multipartRequest = null;
+		//1.2接收图片,srping自带的上传工具
+		CommonsMultipartFile headTitleManagementAdd_lineImg = null;
+		//1.3文件上传解析器
+		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		//1.4判断是否是流文件类型并转换
+		if (commonsMultipartResolver.isMultipart(request)) {
+			multipartRequest = (MultipartHttpServletRequest) request;
+			headTitleManagementAdd_lineImg = (CommonsMultipartFile) multipartRequest.getFile("headTitleManagementEdit_lineImg");
+		} else {
 			modelMap.put("success", false);
-			modelMap.put("errMsg", e.toString());
+			modelMap.put("errMsg", "上传图片不能为空！");
 			return modelMap;
 		}
 		if (headLine != null && headLine.getLineId() != null) {
@@ -169,7 +210,14 @@ public class HeadLineController {
 				headLine.setLineLink(
 						(headLine.getLineLink() == null) ? null : URLDecoder.decode(headLine.getLineLink(), "UTF-8"));
 				// 修改头条信息
-				HeadLineExecution ae = headLineService.modifyHeadLine(headLine, thumbnail);
+//				HeadLineExecution ae = headLineService.modifyHeadLine(headLine, thumbnail);
+				HeadLineExecution ae;
+				if (headTitleManagementAdd_lineImg != null) {
+					ImageHolder imageHolder = new ImageHolder(headTitleManagementAdd_lineImg.getOriginalFilename(), headTitleManagementAdd_lineImg.getInputStream());
+					ae = headLineService.modifyHeadLine(headLine, imageHolder);
+				} else {
+					ae = headLineService.modifyHeadLine(headLine, null);
+				}
 				if (ae.getState() == HeadLineStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
 				} else {
@@ -272,7 +320,7 @@ public class HeadLineController {
 	 * 
 	 * @param request
 	 * @param thumbnail
-	 * @param productImgList
+//	 * @param productImgList
 	 * @return
 	 * @throws IOException
 	 */

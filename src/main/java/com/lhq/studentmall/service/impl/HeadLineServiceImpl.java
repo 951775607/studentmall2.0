@@ -5,6 +5,7 @@ import com.lhq.studentmall.dao.HeadLineDao;
 import com.lhq.studentmall.dto.HeadLineExecution;
 import com.lhq.studentmall.dto.ImageHolder;
 import com.lhq.studentmall.entity.HeadLine;
+import com.lhq.studentmall.entity.ShopCategory;
 import com.lhq.studentmall.enume.HeadLineStateEnum;
 import com.lhq.studentmall.service.HeadLineService;
 import com.lhq.studentmall.util.ImgeUtil;
@@ -48,7 +49,8 @@ public class HeadLineServiceImpl implements HeadLineService {
 			headLine.setLastEditTime(new Date());
 			// 若传入的头条图片为非空，则存储图片并在实体类里将图片的相对路径设置上
 			if (thumbnail != null) {
-				addThumbnail(headLine, thumbnail);
+//				addThumbnail(headLine, thumbnail);
+				addShopImg(headLine, thumbnail);
 			}
 			try {
 				// 往数据库里插入头条信息
@@ -60,7 +62,7 @@ public class HeadLineServiceImpl implements HeadLineService {
 					return new HeadLineExecution(HeadLineStateEnum.INNER_ERROR);
 				}
 			} catch (Exception e) {
-				throw new RuntimeException("添加区域信息失败:" + e.toString());
+				throw new RuntimeException("添加头条信息失败:" + e.toString());
 			}
 		} else {
 			return new HeadLineExecution(HeadLineStateEnum.EMPTY);
@@ -82,7 +84,8 @@ public class HeadLineServiceImpl implements HeadLineService {
 					ImgeUtil.deleteFileOrPath(tempHeadLine.getLineImg());
 				}
 				// 添加新的图片，并将新的图片相对路径设置到实体类里
-				addThumbnail(headLine, thumbnail);
+//				addThumbnail(headLine, thumbnail);
+				addShopImg(headLine, thumbnail);
 			}
 			try {
 				// 更新头条信息
@@ -184,4 +187,21 @@ public class HeadLineServiceImpl implements HeadLineService {
 //		}
 //	}
 
+
+	/**
+	 * 功能描述:添加图片
+	 *
+	 * @param:
+	 * @return:
+	 **/
+	private void addShopImg(HeadLine headLine, ImageHolder thumbnail) {
+
+		//获取绝对路径
+//        String dest = PathUtil.getShopImagePath(shop.getShopId());
+		String dest = PathUtil.getShopCategoryPath();
+		System.out.println("相对路径dest:" + dest);
+		String headLineImgAddr = ImgeUtil.generateThumbnail(thumbnail, dest);
+		System.out.println("照片相对路径shopImgAddr:" + headLineImgAddr);
+		headLine.setLineImg(headLineImgAddr);
+	}
 }

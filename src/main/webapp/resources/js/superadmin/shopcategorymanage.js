@@ -194,6 +194,7 @@ function shopCategoryManagementAdd() {
 			var messgage = "添加成功!";
 			listShopCategoryManagementInfo();
 			$("#shopCategoryManagementAdd_message").html(messgage);
+            closeDialog_add();
 		}
 	};
 	$("#shopCategoryFormAdd").ajaxSubmit(options);
@@ -286,6 +287,7 @@ function shopCategoryManagementEdit() {
 		success : function() {
 			var messgage = "修改成功!";
 			listShopCategoryManagementInfo();
+            closeDialog_edit();
 			$("#shopCategoryManagementEdit_message").html(messgage);
 		}
 	};

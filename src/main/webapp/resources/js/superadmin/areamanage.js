@@ -70,9 +70,10 @@ function optFormater(value, row, index) {
     var areaName = row.areaName;
     var priority = row.priority;
     var params = areaId + ",'" + areaName + "'," + priority;
-    var edit = '<a href="javascript:openDialog_edit(' + params + ')">编辑</a>';
-    edit += '<a href="javascript:doDel(' + areaId + ')">&nbsp&nbsp&nbsp&nbsp删除</a>';
-    return edit;
+    var edit = '<a href="javascript:openDialog_edit(' + params + ')">编辑</a>| ';
+    // edit += '<a href="javascript:doDel(' + areaId + ')">&nbsp&nbsp&nbsp&nbsp删除</a>';
+    var del = '<a href="#" onclick="doDel(' + areaId + ')">删除</a>';
+    return edit+del;
 };
 
 /** --------------添加操作弹出框------------------* */
@@ -131,6 +132,7 @@ function areaManagementAdd() {
         success : function() {
             var messgage = "添加成功!";
             listAreaManagementInfo();
+            closeDialog_add()
             $("#areaManagementAdd_message").html(messgage);
         }
     });
@@ -205,6 +207,7 @@ function areaManagementEdit() {
         success : function() {
             var messgage = "修改成功!";
             listAreaManagementInfo();
+            closeDialog_edit()
             $("#areaManagementEdit_message").html(messgage);
         }
     });

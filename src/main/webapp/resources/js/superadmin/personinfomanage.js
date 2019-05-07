@@ -240,6 +240,7 @@ function personinfoManagementEdit() {
             var messgage = "修改成功!";
             searchAccountInfo();
             $("#personinfoManagementEdit_message").html(messgage);
+            closeDialog_edit()
         }
     });
 }

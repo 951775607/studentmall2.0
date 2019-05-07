@@ -36,8 +36,9 @@
 	width: 160px;
 	float: left;
 	font-size: 14px;
-	font-family: "微软雅黑" "幼圆" "arila";
-	background: url(/images/Right.gif) no-repeat 140px center;
+	font-family: "微软雅黑","幼圆","arila";
+	background: url("../../../../images/right.gif") no-repeat 140px center;
+	/*background: url(resources/images/right.gif) no-repeat 140px center;*/
 }
 
 .ToolTip_Form ul li textarea,.ToolTip_Form ul li .setinput {
